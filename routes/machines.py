@@ -69,14 +69,15 @@ async def update_machine(data: MachineInputDTO):
 async def delete_machine(id: int):
     """Delete a machine."""
     try:
-        id_ = await app.db.fetch_val(
-            """SELECT * from delete_machine(:id);""",
-            values={'id': id},
-        )
         image_url = await app.db.fetch_val(
             """SELECT delete_machine_image_and_get_url( :machine_id );""",
             values={'machine_id': id},
         )
+        id_ = await app.db.fetch_val(
+            """SELECT * from delete_machine(:id);""",
+            values={'id': id},
+        )
+
         if id_ is None:
             return jsonify({'error': 'Machine not found'}), 404
         if image_url is not None:

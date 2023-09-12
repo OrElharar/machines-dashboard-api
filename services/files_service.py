@@ -1,17 +1,17 @@
 import os
 import uuid
-
+from utils import constants
 from quart.datastructures import FileStorage
 
 
 def remove_file(file_url: str = None, host_url: str = None, root_path: str = None):
     if file_url is None or host_url is None or root_path is None:
         raise ValueError("file_url, host_url, and root_path must be provided")
-
-    image_path = file_url.replace(host_url, '')
-    image_path = os.path.join(root_path, '../api', image_path)
-    if os.path.exists(image_path):
-        os.remove(image_path)
+    images_folder = os.path.join(root_path, '../api', constants.IMAGES_REPOSITORY)
+    file_name = file_url.split('/')[-1]
+    file_to_remove_path = os.path.join(images_folder, file_name)
+    if os.path.exists(file_to_remove_path):
+        os.remove(file_to_remove_path)
 
 
 async def save_file(file: FileStorage = None, host_url: str = None, root_path: str = None, repository: str = None):
