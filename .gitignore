@@ -1,0 +1,27 @@
+/images_repository
+
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+venv/
+.idea/
+*.sqlite3
+
+.env
+.env.*
+
+.ipynb_checkpoints/
+
+*.pyc
+
+__pycache__/
+*.py[cod]
+
+env/
+lib/
+lib64/
+include/
